@@ -18,6 +18,8 @@ class Web < Sinatra::Application
   end
 
   post '/deploy/:app_name/:secret' do |app_name, secret|
+    logger.info params.inspect
+    logger.info "correct secret"
     if secret == ENV['DEPLOY_SECRET']
       logger.info "correct secret"
       if HerokuDeployer.exists?(app_name)
