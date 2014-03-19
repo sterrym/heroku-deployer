@@ -68,7 +68,7 @@ class HerokuDeployer
     GitSSHWrapper.with_wrapper(:private_key => ENV['DEPLOY_SSH_KEY']) do |wrapper|
       wrapper.set_env
       logger.info "pushing"
-      logger.debug `cd #{local_folder}; git push -f heroku master`
+      logger.debug `cd #{local_folder}; git push -f heroku master && heroku run rake db:migrate && heroku restart`
     end
   end
 end
